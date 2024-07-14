@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import "./App.css";
+import Navbar from "./components/Navbar";
+// import Welcome from "./components/Welcome";
+import TextForm from "./components/TextForm";
+import Time from "./components/Time";
 function App() {
+  const [mode, setMode] = useState("light");
+  const [btnText, setBtnText] = useState("Enable Dark Mode");
+  const changeStyle = () => {
+    if (mode === "light") {
+      setMode("dark");
+      document.body.style.color = "white";
+      document.body.style.backgroundColor = "black";
+      setBtnText("Enable Light Mode");
+    } else {
+      setMode("light");
+      document.body.style.color = "black";
+      document.body.style.backgroundColor = "white";
+      setBtnText("Enable Dark Mode");
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar logo="TextFormatter" />
+      <Time changeStyle={changeStyle} btnText={btnText} />
+      <TextForm heading="Enter the text below to analyze:" />
     </div>
   );
 }
